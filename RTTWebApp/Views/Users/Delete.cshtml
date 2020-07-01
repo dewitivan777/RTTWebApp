@@ -1,0 +1,18 @@
+﻿<div class="modal fade" id="CreateUser" tabindex="-1" role="dialog" aria-labelledby="CreateUserModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <p class="h3 modal-title">Please login to continue</p>
+            </div>
+            <div class="modal-body">
+                <form data-ajax="true" data-ajax-method="post" data-ajax-success="loginUserResult" id="loginForm" asp-controller="Account" asp-action="Login" asp-route-returnurl="@ViewBag.ReturnUrl" asp-route-GoToDashboard=@false>
+
+                    <div class="form-group text-right">
+                        <a data-dismiss="modal" data-toggle="modal" data-target="#RegisterUser">Don't have an account? Register now!</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

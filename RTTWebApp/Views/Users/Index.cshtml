@@ -1,39 +1,164 @@
 ﻿@{
     ViewBag.Title = "Users";
 }
+@using RTTWebApp.ServiceUser
 
-@model  RTTWebApp.Models.SearchResult.UserSearch
-
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+<div class="card">
+    <h4 class="card-header">Users</h4>
+    <div class="card-body">
+        <form role="form" novalidate="novalidate" lpformnum="1">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label>User Id</label>
+                        <input type="text" name="UserId" placeholder="Enter UserId" class="form-control" autocomplete="off">
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label>First Name</label>
+                        <input type="text" name="FirstName" placeholder="FirstName" class="form-control" autocomplete="off">
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label>Surname</label>
+                        <input type="text" name="Surname" placeholder="Surname" class="form-control" autocomplete="off">
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="text" name="Email" placeholder="Enter Email" class="form-control" autocomplete="off">
+                    </div>
+                </div>
+            </div>
+            <a data-bind="click: Search">
+                <button class="btn btn-primary">Search</button>
+            </a>
+        </form>
+    </div>
 </div>
 
-<div>
+<div class="card">
+    <h4 class="card-header" style="line-height: 33px;">
+        <span data-bind="HeaderText">Users</span>
+        <a data-toggle="modal" data-target="#CreateUser" class="btn btn-primary pull-right"><i class="fa fa-share-square-o"></i>Add User</a>
+    </h4>
     <table class="table table-sm table-responsive table-bordered mb-0">
         <thead>
-            <tr>
-                <th>State</th>
-                <th>Id</th>
-                <th>Package</th>
-                <th>Source</th>
-                <th>Section</th>
-                <th>Affiliate</th>
-                <th>Email</th>
-                <th>Business</th>
-                <th>Name</th>
-                <th>Number</th>
-                <th>Reg. Date</th>
-                <th>&nbsp;</th>
-            </tr>
+        <tr>
+            <th>
+                UserID
+            </th>
+            <th>
+                FirstName
+            </th>
+            <th>
+                Surname
+            </th>
+            <th>
+                Gender
+            </th>
+            <th>
+                DOB
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Mobile
+            </th>
+            <th>
+                WorkMobile
+            </th>
+            <th>
+                DateCreated
+            </th>
+            <th>
+                DateUpdated
+            </th>
+            <th>&nbsp;</th>
+        </tr>
         </thead>
-        @foreach (var user in Model.Users)
-        {
-            <tbody>
-            <tr>
-            </tr>
-            </tbody>
-        }
+        <tbody data-bind="foreach: Users">
+        <tr>
+            <td>
+                <div data-bind="text: Userid"></div>
+            </td>
+            <td>
+                <div data-bind="text: Firstname"></div>
+            </td>
+            <td>
+                <div data-bind="text: Surname"></div>
+            </td>
+            <td>
+                <div data-bind="text: Gender"></div>
+            </td>
+            <td>
+                <div data-bind="text: DOB"></div>
+            </td>
+            <td>
+                <div data-bind="text: Email"></div>
+            </td>
+            <td>
+                <div data-bind="text: Mobile"></div>
+            </td>
+            <td>
+                <div data-bind="text: WorkMobile"></div>
+            </td>
+            <td>
+                <div data-bind="text: DateCreated"></div>
+            </td>
+            <td>
+                <div data-bind="text: DateUpdated"></div>
+            </td>
+            <td>
+                <a data-toggle="modal" data-target="#AddAddress" asp-route-id="userId">Add Address</a> |
+                <a data-toggle="modal" data-target="#ShowAddress" asp-route-id="userId">Show User Addresses</a> |
+                <a data-toggle="modal" data-target="#UserEdit" asp-route-id="userId">Edit</a> |
+                <a data-toggle="modal" data-target="#UserDelete" asp-route-id="userId">Delete</a>
+            </td>
+        </tr>
+        </tbody>
     </table>
 </div>
+
+<nav aria-label="page navigation here" data-bind="visible: ShowPagingControl">
+    <ul class="pagination justify-content-center">
+        <li class="page-item" data-bind="visible: !FirstPageActive()">
+            <a href="javascript:;" class="page-link" aria-label="Previous" data-bind="click: GoToFirstPage">
+                <span aria-hidden="true">&laquo;</span><span class="sr-only">Previous</span>
+            </a>
+        </li>
+        <li class="page-item" data-bind="visible: HasPrevious">
+            <a title="Prev" href="javascript:;" class="page-link" aria-label="Previous" data-bind="click: GoToPreviousPage">
+                <span aria-hidden="true">&lsaquo;</span><span class="sr-only">Previous</span>
+            </a>
+        </li>
+
+        <!-- ko foreach: Pages -->
+        <li class="page-item" data-bind="css: { active: $parent.CurrentPage() === $data }">
+            <a href="javascript:;" class="page-link" data-bind="click: $parent.GoToPage, text: $data"></a>
+        </li>
+        <!-- /ko -->
+
+        <li class="page-item" data-bind="visible: HasNext">
+            <a href="#" class="page-link" aria-label="Next" data-bind="click: GoToNextPage">
+                <span aria-hidden="true">&rsaquo;</span><span class="sr-only">Next</span>
+            </a>
+        </li>
+    </ul>
+</nav>
+
+@{
+    Html.RenderPartial("Create", new UserDetails());
+    Html.RenderPartial("Edit", new UserDetails());
+    Html.RenderPartial("Delete");
+}
+
+@section scripts
+{
+    <script src="~/Scripts/lib/knockout/knockout-latest.min.js"></script>
+    <script src="~/Scripts/ViewModels/UserViewModel.js"></script>
+}

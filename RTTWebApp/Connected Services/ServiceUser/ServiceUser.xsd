@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/WcfServiceApp" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/WcfServiceApp" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="UserDetails">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DOB" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="DateCreated" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="DateUpdated" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Firstname" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Gender" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Mobile" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Surname" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Userid" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="WorkMobile" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UserDetails" nillable="true" type="tns:UserDetails" />
+  <xs:complexType name="UserData">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="UsersTable" nillable="true">
+        <xs:complexType>
+          <xs:annotation>
+            <xs:appinfo>
+              <ActualType Name="DataTable" Namespace="http://schemas.datacontract.org/2004/07/System.Data" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+            </xs:appinfo>
+          </xs:annotation>
+          <xs:sequence>
+            <xs:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+            <xs:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UserData" nillable="true" type="tns:UserData" />
+  <xs:complexType name="UserSearchQuery">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Limit" type="xs:int" />
+      <xs:element minOccurs="0" name="Offset" type="xs:int" />
+      <xs:element minOccurs="0" name="UserQuery" nillable="true" type="tns:UserDetails" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UserSearchQuery" nillable="true" type="tns:UserSearchQuery" />
+  <xs:complexType name="ArrayOfUserDetails">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="UserDetails" nillable="true" type="tns:UserDetails" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfUserDetails" nillable="true" type="tns:ArrayOfUserDetails" />
+  <xs:complexType name="UserAddressDetails">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Address" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="AddressType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="City" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DateCreated" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="DateUpdated" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Id" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Province" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UserId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Zipcode_PostalCode" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UserAddressDetails" nillable="true" type="tns:UserAddressDetails" />
+  <xs:complexType name="UserAddress">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AddressTable" nillable="true">
+        <xs:complexType>
+          <xs:annotation>
+            <xs:appinfo>
+              <ActualType Name="DataTable" Namespace="http://schemas.datacontract.org/2004/07/System.Data" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+            </xs:appinfo>
+          </xs:annotation>
+          <xs:sequence>
+            <xs:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+            <xs:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UserAddress" nillable="true" type="tns:UserAddress" />
+  <xs:complexType name="ArrayOfUserAddressDetails">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="UserAddressDetails" nillable="true" type="tns:UserAddressDetails" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfUserAddressDetails" nillable="true" type="tns:ArrayOfUserAddressDetails" />
+  <xs:complexType name="ExportData">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ExportTable" nillable="true">
+        <xs:complexType>
+          <xs:annotation>
+            <xs:appinfo>
+              <ActualType Name="DataTable" Namespace="http://schemas.datacontract.org/2004/07/System.Data" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+            </xs:appinfo>
+          </xs:annotation>
+          <xs:sequence>
+            <xs:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+            <xs:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ExportData" nillable="true" type="tns:ExportData" />
+</xs:schema>
