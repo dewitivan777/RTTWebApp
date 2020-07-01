@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Drawing;
 using System.IO;
+using System.Linq;
+using System.ServiceModel;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using Microsoft.AspNetCore.Mvc;
@@ -18,32 +20,16 @@ namespace RTTWebApp.Controllers
         // GET: Users
         public async Task<ViewResult> Index()
         {
-            var result = new UserResults();
-
-            var response = await userService.GetAllAsync(new UserDetails()
-            {
-
-            });
-
-            result.Users = response;
-            result.Total = response.Length;
-
-            return View(result);
+            return View();
         }
 
-        public async Task<JsonResult> Search(UserDetails model)
+        public async Task<JsonResult> Search(UserSearchQuery model)
         {
-            var endpoint = Request.QueryString.ToString();
             var result = new UserResults();
-
-            var response = await userService.GetAllAsync(new UserDetails()
-            {
-                
-            });
+            var response = await userService.GetAllAsync(model);
 
             result.Users = response;
             result.Total = response.Length;
-            
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
@@ -51,21 +37,32 @@ namespace RTTWebApp.Controllers
         [HttpPost]
         public async Task<JsonResult> Create(UserDetails Model)
         {
-            var results = userService.InsertUserDetails(Model);
+           var results = false;
+            try
+            {
+                results = await userService.InsertUserDetailsAsync(Model);
+            }
+            catch (FaultException ex)
+            {
+                var arr = ex.Message.Split('\n').ToArray();
+            }
+
             return Json(results);
         }
 
-        //[HttpPut]
-        //public async Task<IActionResult> Edit(UserDetails Model)
-        //{
-        //    return View();
-        //}
+        [HttpPut]
+        public async Task<JsonResult> Edit(UserDetails Model)
+        {
+            var results = await userService.UpdateAsync(Model);
+            return Json(results);
+        }
 
-        //[HttpDelete]
-        //public async Task<IActionResult> Delete(string Id)
-        //{
-        //    return View();
-        //}
+        [HttpDelete]
+        public async Task<JsonResult> Delete(string Id)
+        {
+            var results = await userService.DeleteAsync(Id);
+            return Json(results);
+        }
 
         //[HttpPost("ExportUserEventsXLSX")]
         //public async Task<IActionResult> ExportUserEventsXLSX(string requestUri, int offset = 0, int limit = 50000)

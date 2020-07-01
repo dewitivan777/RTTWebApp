@@ -33,11 +33,9 @@ function userViewModel() {
 
                 if (name == 'Limit') return;
 
-                if (name == 'Cell') {
-                    sb.push('should=cell:' + value + ';tel:' + value);
-                } else if (name == 'ReportingSource' && value == 'Junk Mail') {
-                    sb.push('reportingSource=Web|Android');
-                }
+                if (name == 'Mobile') {
+                    sb.push('mobile=' + value + '&workMobile=' + value);
+                } 
                 else {
                     sb.push(camelize($(e).attr('name')) + '=' + value);
                 }
@@ -80,9 +78,16 @@ function userViewModel() {
                 $('#ajax-loader').css("visibility", "visible");
             },
             'success': function (result) {
- 
+                if (result) {
+                    popup.showNotification("Notice", "User successfully created.", "top", "left", 3000, "true");
+                } else {
+                    popup.showNotification("Notice", "User creation failed.", "top", "left", 3000, "true");
+                }
+
+                $("#CreateUser").modal('toggle');
             },
             'error': function (result) {
+
             },
             'complete': function () {
                 $('#ajax-loader').css("visibility", "hidden");
