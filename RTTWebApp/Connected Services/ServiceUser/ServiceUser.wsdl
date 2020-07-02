@@ -6,6 +6,7 @@
       <xsd:import schemaLocation="http://localhost:57284/ServiceUser.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:57284/ServiceUser.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/WcfServiceApp" />
       <xsd:import schemaLocation="http://localhost:57284/ServiceUser.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System.Data" />
+      <xsd:import schemaLocation="http://localhost:57284/ServiceUser.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/WcfServiceApp.Models" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IServiceUser_Get_InputMessage">
@@ -26,11 +27,11 @@
   <wsdl:message name="IServiceUser_GetAddress_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetAddressResponse" />
   </wsdl:message>
-  <wsdl:message name="IServiceUser_GetUserAddress_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetUserAddress" />
+  <wsdl:message name="IServiceUser_GetAllAddress_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllAddress" />
   </wsdl:message>
-  <wsdl:message name="IServiceUser_GetUserAddress_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetUserAddressResponse" />
+  <wsdl:message name="IServiceUser_GetAllAddress_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllAddressResponse" />
   </wsdl:message>
   <wsdl:message name="IServiceUser_GetAllExportDetails_InputMessage">
     <wsdl:part name="parameters" element="tns:GetAllExportDetails" />
@@ -56,11 +57,23 @@
   <wsdl:message name="IServiceUser_Update_OutputMessage">
     <wsdl:part name="parameters" element="tns:UpdateResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceUser_UpdateAddress_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateAddress" />
+  </wsdl:message>
+  <wsdl:message name="IServiceUser_UpdateAddress_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateAddressResponse" />
+  </wsdl:message>
   <wsdl:message name="IServiceUser_Delete_InputMessage">
     <wsdl:part name="parameters" element="tns:Delete" />
   </wsdl:message>
   <wsdl:message name="IServiceUser_Delete_OutputMessage">
     <wsdl:part name="parameters" element="tns:DeleteResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceUser_DeleteAddress_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteAddress" />
+  </wsdl:message>
+  <wsdl:message name="IServiceUser_DeleteAddress_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteAddressResponse" />
   </wsdl:message>
   <wsdl:portType name="IServiceUser">
     <wsdl:operation name="Get">
@@ -75,9 +88,9 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceUser/GetAddress" message="tns:IServiceUser_GetAddress_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceUser/GetAddressResponse" message="tns:IServiceUser_GetAddress_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetUserAddress">
-      <wsdl:input wsaw:Action="http://tempuri.org/IServiceUser/GetUserAddress" message="tns:IServiceUser_GetUserAddress_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IServiceUser/GetUserAddressResponse" message="tns:IServiceUser_GetUserAddress_OutputMessage" />
+    <wsdl:operation name="GetAllAddress">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceUser/GetAllAddress" message="tns:IServiceUser_GetAllAddress_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceUser/GetAllAddressResponse" message="tns:IServiceUser_GetAllAddress_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetAllExportDetails">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceUser/GetAllExportDetails" message="tns:IServiceUser_GetAllExportDetails_InputMessage" />
@@ -95,9 +108,17 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceUser/Update" message="tns:IServiceUser_Update_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceUser/UpdateResponse" message="tns:IServiceUser_Update_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="UpdateAddress">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceUser/UpdateAddress" message="tns:IServiceUser_UpdateAddress_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceUser/UpdateAddressResponse" message="tns:IServiceUser_UpdateAddress_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="Delete">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceUser/Delete" message="tns:IServiceUser_Delete_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceUser/DeleteResponse" message="tns:IServiceUser_Delete_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteAddress">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceUser/DeleteAddress" message="tns:IServiceUser_DeleteAddress_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceUser/DeleteAddressResponse" message="tns:IServiceUser_DeleteAddress_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IServiceUser" type="tns:IServiceUser">
@@ -129,8 +150,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetUserAddress">
-      <soap:operation soapAction="http://tempuri.org/IServiceUser/GetUserAddress" style="document" />
+    <wsdl:operation name="GetAllAddress">
+      <soap:operation soapAction="http://tempuri.org/IServiceUser/GetAllAddress" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -174,8 +195,26 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="UpdateAddress">
+      <soap:operation soapAction="http://tempuri.org/IServiceUser/UpdateAddress" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="Delete">
       <soap:operation soapAction="http://tempuri.org/IServiceUser/Delete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteAddress">
+      <soap:operation soapAction="http://tempuri.org/IServiceUser/DeleteAddress" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

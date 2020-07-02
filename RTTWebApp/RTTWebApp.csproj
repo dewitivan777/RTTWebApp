@@ -167,13 +167,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AddressController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\SearchResult\AddressResults.cs" />
     <Compile Include="Models\SearchResult\UserResults.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -184,16 +184,16 @@
     <Content Include="Connected Services\ServiceUser\RTTWebApp.ServiceUser.UserAddress.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Connected Services\ServiceUser\RTTWebApp.ServiceUser.UserAddressDetails.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
     <Content Include="Connected Services\ServiceUser\RTTWebApp.ServiceUser.UserData.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Connected Services\ServiceUser\RTTWebApp.ServiceUser.UserDetails.datasource">
+    <Content Include="Connected Services\ServiceUser\RTTWebApp.ServiceUser.ServerResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Connected Services\ServiceUser\RTTWebApp.ServiceUser.ServerResponse.datasource">
+    <Content Include="Connected Services\ServiceUser\RTTWebApp.ServiceUser.ServerResponseAddress.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\ServiceUser\RTTWebApp.ServiceUser.ServerResponseUser.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <None Include="Connected Services\ServiceUser\ServiceUser.disco" />
@@ -234,6 +234,9 @@
     <Content Include="libman.json" />
     <Content Include="Scripts\lib\knockout\knockout-latest.debug.min.js.map" />
     <Content Include="Scripts\lib\knockout\knockout-latest.min.js.map" />
+    <None Include="Connected Services\ServiceUser\ServiceUser4.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -515,6 +518,7 @@
     <Content Include="Scripts\lib\moment\moment.js" />
     <Content Include="Scripts\lib\moment\moment.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\ViewModels\AddressViewModel.js" />
     <Content Include="Scripts\ViewModels\UserViewModel.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -536,10 +540,12 @@
     <Content Include="Views\Users\CreateAddress.cshtml" />
     <Content Include="Scripts\lib\moment\moment-with-locales.min.js.map" />
     <Content Include="Scripts\lib\moment\moment.min.js.map" />
+    <Content Include="Views\Address\Index.cshtml" />
+    <Content Include="Views\Address\Edit.cshtml" />
+    <Content Include="Views\Address\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Address\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

@@ -25,7 +25,7 @@
   <xs:element name="GetAllResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/WcfServiceApp" minOccurs="0" name="GetAllResult" nillable="true" type="q4:ArrayOfUserDetails" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/WcfServiceApp" minOccurs="0" name="GetAllResult" nillable="true" type="q4:ServerResponseUser" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -43,17 +43,17 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetUserAddress">
+  <xs:element name="GetAllAddress">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/WcfServiceApp" minOccurs="0" name="addressInfo" nillable="true" type="q7:UserAddressDetails" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/WcfServiceApp" minOccurs="0" name="addressInfo" nillable="true" type="q7:AddressSearchQuery" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetUserAddressResponse">
+  <xs:element name="GetAllAddressResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/WcfServiceApp" minOccurs="0" name="GetUserAddressResult" nillable="true" type="q8:ArrayOfUserAddressDetails" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/WcfServiceApp" minOccurs="0" name="GetAllAddressResult" nillable="true" type="q8:ServerResponseAddress" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -111,6 +111,20 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="UpdateAddress">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/WcfServiceApp" minOccurs="0" name="addressInfo" nillable="true" type="q16:UserAddressDetails" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateAddressResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/WcfServiceApp" minOccurs="0" name="UpdateAddressResult" nillable="true" type="q17:ServerResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="Delete">
     <xs:complexType>
       <xs:sequence>
@@ -121,7 +135,21 @@
   <xs:element name="DeleteResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/WcfServiceApp" minOccurs="0" name="DeleteResult" nillable="true" type="q16:ServerResponse" />
+        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/WcfServiceApp" minOccurs="0" name="DeleteResult" nillable="true" type="q18:ServerResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteAddress">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Id" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteAddressResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/WcfServiceApp" minOccurs="0" name="DeleteAddressResult" nillable="true" type="q19:ServerResponse" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

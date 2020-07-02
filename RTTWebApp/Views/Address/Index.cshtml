@@ -1,9 +1,9 @@
 ﻿
 @{
-    ViewBag.Title = "Users";
+    ViewBag.Title = "Addresses";
 }
 <div class="card">
-    <h4 class="card-header">Users</h4>
+    <h4 class="card-header">Addresses</h4>
     <div class="card-body">
         <form role="form" novalidate="novalidate" lpformnum="1">
             <div class="row">
@@ -15,36 +15,28 @@
                 </div>
                 <div class="col-sm-4">
                     <div class="form-group">
-                        <label>First Name</label>
-                        <input type="text" name="FirstName" placeholder="FirstName" class="form-control" autocomplete="off">
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <label>Surname</label>
-                        <input type="text" name="Surname" placeholder="Surname" class="form-control" autocomplete="off">
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <label>Email</label>
-                        <input type="text" name="Email" placeholder="Enter Email" class="form-control" autocomplete="off">
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <label>Mobile</label>
-                        <input type="text" name="Mobile" placeholder="Enter Email" class="form-control" autocomplete="off">
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <label>Gender</label>
-                        <select class="form-control" name="Gender">
+                        <label>Address Type</label>
+                        <select class="form-control" name="AddressType">
                             <option></option>
-                            <option>Male</option>
-                            <option>Female</option>
+                            <option>Residential</option>
+                            <option>Business</option>
                             <option>Other</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label>Province</label>
+                        <select class="form-control" name="Province">
+                            <option></option>
+                            <option>Eastern Cape</option>
+                            <option>Free State</option>
+                            <option>Gauteng</option>
+                            <option>KwaZulu-Natal</option>
+                            <option>Mpumalanga</option>
+                            <option>North West</option>
+                            <option>Northern Cape</option>
+                            <option>Western Cape</option>
                         </select>
                     </div>
                 </div>
@@ -59,36 +51,31 @@
 <div >
     <div class="card">
         <h4 class="card-header" style="line-height: 33px;">
-            <span data-bind="text: HeaderText">Users</span>
-            <a data-toggle="modal" data-target="#CreateUser" class="btn btn-primary pull-right"><i class="fa fa-share-square-o"></i>Add User</a>
-            <a class="btn btn-primary" data-bind="click: ExportUsers">Export</a>
+            <span data-bind="text: HeaderText">Addresses</span>
         </h4>
         <table class="table table-sm table-responsive table-bordered mb-0">
             <thead>
                 <tr>
                     <th>
-                        UserID
+                        Id
                     </th>
                     <th>
-                        FirstName
+                        UserId
                     </th>
                     <th>
-                        Surname
+                        AddressType
                     </th>
                     <th>
-                        Gender
+                        Address
                     </th>
                     <th>
-                        DOB
+                        City
                     </th>
                     <th>
-                        Email
+                        Province
                     </th>
                     <th>
-                        Mobile
-                    </th>
-                    <th>
-                        WorkMobile
+                        ZipCode_PostalCode
                     </th>
                     <th>
                         DateCreated
@@ -99,31 +86,28 @@
                     <th>&nbsp;</th>
                 </tr>
             </thead>
-            <tbody data-bind="foreach: Users">
+            <tbody data-bind="foreach: Addresses">
                 <tr>
+                    <td>
+                        <div data-bind="text: Id"></div>
+                    </td>
                     <td>
                         <div data-bind="text: UserId"></div>
                     </td>
                     <td>
-                        <div data-bind="text: FirstName"></div>
+                        <div data-bind="text: AddressType"></div>
                     </td>
                     <td>
-                        <div data-bind="text: Surname"></div>
+                        <div data-bind="text: Address"></div>
                     </td>
                     <td>
-                        <div data-bind="text: Gender"></div>
+                        <div data-bind="text: City"></div>
                     </td>
                     <td>
-                        <div data-bind="text: $parent.convertToJsDate(DOB)"></div>
+                        <div data-bind="text: Province"></div>
                     </td>
                     <td>
-                        <div data-bind="text: Email"></div>
-                    </td>
-                    <td>
-                        <div data-bind="text: Mobile"></div>
-                    </td>
-                    <td>
-                        <div data-bind="text: WorkMobile"></div>
+                        <div data-bind="text: ZipCode_PostalCode"></div>
                     </td>
                     <td>
                         <div data-bind="text: $parent.convertToJsDate(DateCreated)"></div>
@@ -132,10 +116,9 @@
                         <div data-bind="text: $parent.convertToJsDate(DateUpdated)"></div>
                     </td>
                     <td>
-                        <a href="#" data-bind="click: $parent.showAddressDialog.bind($data, UserId)" data-toggle="modal" data-target="#CreateAddress">Add Address</a> |
-                        <a data-bind="attr:{href:'/Address?AddressQuery.UserId=' + UserId, target: '_blank'}">Show User Addresses</a> |
-                        <a href="#" data-bind="click: $parent.showEditDialog.bind($data, UserId,FirstName,Surname,Gender,$parent.convertToJsDate(DOB),Email,Mobile,WorkMobile)" data-toggle="modal" data-target="#EditUser">Edit</a> |
-                        <a href="#" data-bind="click: $parent.showDeleteDialog.bind($data, UserId, FirstName, Surname)" data-toggle="modal" data-target="#DeleteUser">Delete</a>
+                        <a data-bind="attr:{href:'/Users?UserQuery.UserId=' + UserId, target: '_blank'}">Show User</a> |
+                        <a href="#" data-bind="click: $parent.showEditDialog.bind($data, Id, UserId, Address, AddressType, City, Province, ZipCode_PostalCode)" data-toggle="modal" data-target="#EditAddress">Edit</a> |
+                        <a href="#" data-bind="click: $parent.showDeleteDialog.bind($data, Id)" data-toggle="modal" data-target="#AddressDelete">Delete</a>
                     </td>
                 </tr>
             </tbody>
@@ -170,10 +153,8 @@
     </nav>
 </div>
 @{
-    Html.RenderPartial("Create");
     Html.RenderPartial("Edit");
     Html.RenderPartial("Delete");
-    Html.RenderPartial("CreateAddress");
 }
 
 @section scripts
@@ -214,5 +195,5 @@
     </script>
 
     <script src="~/Scripts/lib/knockout/knockout-latest.min.js"></script>
-    <script src="~/Scripts/ViewModels/UserViewModel.js"></script>
+    <script src="~/Scripts/ViewModels/AddressViewModel.js"></script>
 }

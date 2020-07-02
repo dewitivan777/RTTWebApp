@@ -1,18 +1,17 @@
-function userViewModel() {
+﻿function addressViewModel() {
     var self = this;
 
-    self['Users'] = ko.observableArray([]);
+    self['Addresses'] = ko.observableArray([]);
 
     self['Exporting'] = ko.observable(false);
 
+    self['id'] = ko.observable("");
     self['userId'] = ko.observable("");
-    self['firstName'] = ko.observable("");
-    self['surname'] = ko.observable("");
-    self['dOB'] = ko.observable("");
-    self['gender'] = ko.observable("");
-    self['mobile'] = ko.observable("");
-    self['workMobile'] = ko.observable("");
-    self['email'] = ko.observable("");
+    self['address'] = ko.observable("");
+    self['addressType'] = ko.observable("");
+    self['city'] = ko.observable("");
+    self['province'] = ko.observable("");
+    self['zipcode_PostalCode'] = ko.observable("");
     self['datecreated'] = ko.observable("");
     self['dateupdated'] = ko.observable("");
 
@@ -26,7 +25,7 @@ function userViewModel() {
     self['NextPageResultsLoading'] = ko.observable(false);
     self['HeaderText'] = ko.observable();
 
-    self.SearchBaseUri = '/users/search';
+    self.SearchBaseUri = '/address/search';
 
     self['Search'] = function (initialQuery) {
         var sb = [];
@@ -41,7 +40,7 @@ function userViewModel() {
                     sb.push('mobile=' + value + '&workMobile=' + value);
                 }
                 else {
-                    sb.push("UserQuery." + camelize($(e).attr('name')) + '=' + value);
+                    sb.push("AddressQuery." + camelize($(e).attr('name')) + '=' + value);
                 }
             }
         });
@@ -60,89 +59,32 @@ function userViewModel() {
             }
 
             $.get(requestUri, function (data) {
-                self['Users'](data.Users);
+                self['Addresses'](data.Addresses);
                 self['Total'](data.Total);
                 self['SetHeaderText'](data.Total);
             });
         }
     };
 
-    self.CreateUser = function (page) {
+    self.EditAddress = function (page) {
         var data = new FormData();
 
-        $('#CreateUserForm input,select').each(function (i, e) {
-            //Remove error Messages
+        $('#EditAddressForm input,select,textarea').each(function (i, e) {
             if ($(e).next('span').find('span').length) {
                 $(e).next('span').find('span').remove();
             }
-
             var value = $(e).val().trim();
             if (value.length) {
                 data.append($(e).attr('name'), value);
             }
         });
 
-        $.ajax({
-            'url': '/Users/Create',
-            'data': data,
-            'processData': false,
-            'contentType': false,
-            'type': "POST",
-            'beforeSend': function () {
-                $('#ajax-loader').css("visibility", "visible");
-            },
-            'success': function (result) {
-                if (result.Success == true) {
-                    popup.showNotification("Notice", "User successfully created.", "top", "left", 3000, "true");
-                } else {
-                    popup.showNotification("Notice", "User creation failed.", "top", "left", 3000, "true");
-                }
-                $("#CreateUser").modal('toggle');
-            },
-            'error': function (result) {
-                if (result.status == 422) {
-                    $.get('/Users/FetchErrors', function (data) {
-                        var errorList = {};
-                        $.each(data, function (errorField, errorMessage) {
-                            errorList[errorField] = errorMessage;
-                        });
-
-                        $('#CreateUserForm input,select').each(function (i, e) {
-                            if (e.name in errorList) {
-                                $(e).next('span').append('<span id="Error">' + errorList[e.name] + '</span>');
-                            }
-                        });
-                    });
-                } else {
-                    popup.showNotification("Notice", "User creation failed.", "top", "left", 3000, "true");
-                }
-            },
-            'complete': function () {
-                $('#ajax-loader').css("visibility", "hidden");
-            }
-        });
-    };
-
-    self.EditUser = function (page) {
-        var data = new FormData();
-
-        $('#EditUserForm input,select').each(function (i, e) {
-            //Remove error Messages
-            if ($(e).next('span').find('span').length) {
-                $(e).next('span').find('span').remove();
-            }
-
-            var value = $(e).val().trim();
-            if (value.length) {
-                data.append($(e).attr('name'), value);
-            }
-        });
-
-        //Add UserId to form data
+        //Add UserId and Id to form data
         data.append("UserId", self['userId']());
+        data.append("Id", self['id']());
 
         $.ajax({
-            'url': '/Users/Edit',
+            'url': '/Address/Edit',
             'data': data,
             'processData': false,
             'contentType': false,
@@ -152,68 +94,12 @@ function userViewModel() {
             },
             'success': function (result) {
                 if (result.Success == true) {
-                    popup.showNotification("Notice", "User successfully Edited.", "top", "left", 3000, "true");
+                    popup.showNotification("Notice", "Address successfully Edited.", "top", "left", 3000, "true");
                 } else {
-                    popup.showNotification("Notice", "User edit failed.", "top", "left", 3000, "true");
+                    popup.showNotification("Notice", "Address edit failed.", "top", "left", 3000, "true");
                 }
 
                 $("#EditUser").modal('toggle');
-            },
-            'error': function (result) {
-                if (result.status == 422) {
-                    $.get('/Users/FetchErrors', function (data) {
-                        var errorList = {};
-                        $.each(data, function (errorField, errorMessage) {
-                            errorList[errorField] = errorMessage;
-                        });
-
-                        $('#EditUserForm input,select').each(function (i, e) {
-                            if (e.name in errorList) {
-                                $(e).next('span').append('<span id="Error">' + errorList[e.name] + '</span>');
-                            }
-                        });
-                    });
-                } else {
-                    popup.showNotification("Notice", "User edit failed.", "top", "left", 3000, "true");
-                }
-            },
-            'complete': function () {
-                $('#ajax-loader').css("visibility", "hidden");
-            }
-        });
-    };
-
-    self.CreateAddress = function (page) {
-        var data = new FormData();
-        $('#CreateAddressForm input,select,textarea').each(function (i, e) {
-            if ($(e).next('span').find('span').length) {
-                $(e).next('span').find('span').remove();
-            }
-            var value = $(e).val().trim();
-            if (value.length) {
-                data.append($(e).attr('name'), value);
-            }
-        });
-        //Add UserId to form data
-        data.append("UserId", self['userId']());
-
-        $.ajax({
-            'url': '/Address/Create',
-            'data': data,
-            'processData': false,
-            'contentType': false,
-            'type': "POST",
-            'beforeSend': function () {
-                $('#ajax-loader').css("visibility", "visible");
-            },
-            'success': function (result) {
-                if (result.Success == true) {
-                    popup.showNotification("Notice", "Address successfully Added.", "top", "left", 3000, "true");
-                } else {
-                    popup.showNotification("Notice", "Address creation failed.", "top", "left", 3000, "true");
-                }
-
-                $("#CreateAddress").modal('toggle');
             },
             'error': function (result) {
                 if (result.status == 422) {
@@ -223,14 +109,14 @@ function userViewModel() {
                             errorList[errorField] = errorMessage;
                         });
 
-                        $('#CreateAddressForm input,select,textarea').each(function (i, e) {
+                        $('#EditAddressForm input,select,textarea').each(function (i, e) {
                             if (e.name in errorList) {
                                 $(e).next('span').append('<span id="Error">' + errorList[e.name] + '</span>');
                             }
                         });
                     });
                 } else {
-                    popup.showNotification("Notice", "Address creation failed.", "top", "left", 3000, "true");
+                    popup.showNotification("Notice", "Address edit failed.", "top", "left", 3000, "true");
                 }
             },
             'complete': function () {
@@ -239,11 +125,11 @@ function userViewModel() {
         });
     };
 
-    self['deleteUser'] = function () {
+    self['deleteAddress'] = function () {
         $.ajax({
             'type': "POST",
-            'url': '/Users/Delete',
-            'data': 'Id=' + self['userId'](),
+            'url': '/Address/Delete',
+            'data': 'Id=' + self['id'](),
             'success': function (result) {
                 if (result.Success == true) {
                     location.reload();
@@ -256,41 +142,25 @@ function userViewModel() {
     };
 
     self['showEditDialog'] = function (
+        Id,
         userid,
-        firstname,
-        surname,
-        gender,
-        dob,
-        email,
-        mobile,
-        workmobile,
-        datecreated,
-        dateupdated) {
-
+        address,
+        addresstype,
+        city,
+        province,
+        zipcode) {
+        self['id'](Id);
         self['userId'](userid);
-        self['firstName'](firstname);
-        self['surname'](surname);
-        self['gender'](gender);
-        self['dOB'](dob);
-        self['mobile'](mobile);
-        self['workMobile'](workmobile);
-        self['email'](email);
-        self['datecreated'](datecreated);
-        self['dateupdated'](dateupdated);
+        self['address'](address);
+        self['addressType'](addresstype);
+        self['city'](city);
+        self['province'](province);
+        self['zipcode_PostalCode'](zipcode);
     };
 
     self['showDeleteDialog'] = function (
-        userid,
-        firstname,
-        surname) {
-        self['userId'](userid);
-        self['firstName'](firstname);
-        self['surname'](surname);
-    };
-
-    self['showAddressDialog'] = function (
-        userid) {
-        self['userId'](userid);
+        id) {
+        self['id'](id);
     };
 
     self['convertToJsDate'] = function (date) {
@@ -325,7 +195,7 @@ function userViewModel() {
         }
 
         $.get(requestUri, function (data) {
-            self['Users'](data.Users);
+            self['Addresses'](data.Addresses);
             self['Total'](data.Total);
             self['CurrentPage'](page);
             self['SetHeaderText'](data.Total);
@@ -398,11 +268,11 @@ function userViewModel() {
         return pages;
     });
 
-    self['ExportUsers'] = function () {
+    self['ExportXLSX'] = function () {
         if (!self['Exporting']()) {
             self['Exporting'](true);
             var requestUri = self.Query();
-            $.post('/users/exportusers', { 'requestUri': requestUri }, function (result) {
+            $.post('/users/exportxlsx', { 'requestUri': requestUri }, function (result) {
                 self['Exporting'](false);
                 var exportUri = '/users/getuserexport?id=' + result.id + '&filename=' + result.filename;
                 var link = document.createElement("a");
@@ -442,9 +312,9 @@ function userViewModel() {
             }
 
             if (self['ShowPagingControl']()) {
-                headerText = 'Page ' + self['CurrentPage']() + ': ' + fromUser + ' to ' + toUser + ' of ' + total + ' Users';
+                headerText = 'Page ' + self['CurrentPage']() + ': ' + fromUser + ' to ' + toUser + ' of ' + total + ' Addresses';
             } else {
-                headerText = fromUser + ' to ' + toUser + ' of ' + total + ' Users';
+                headerText = fromUser + ' to ' + toUser + ' of ' + total + ' Addresses';
             }
         }
 
@@ -454,7 +324,7 @@ function userViewModel() {
 
 
 (function () {
-    var vm = new userViewModel();
+    var vm = new addressViewModel();
     ko.applyBindings(vm);
 
     if (location.search.length) {

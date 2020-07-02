@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/WcfServiceApp.Models" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/WcfServiceApp.Models" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="UserSearchModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Gender" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Mobile" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Surname" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UserId" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UserSearchModel" nillable="true" type="tns:UserSearchModel" />
+  <xs:complexType name="AddressSearchModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Address" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="AddressType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="City" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Province" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UserId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZipCode_PostalCode" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="AddressSearchModel" nillable="true" type="tns:AddressSearchModel" />
+</xs:schema>

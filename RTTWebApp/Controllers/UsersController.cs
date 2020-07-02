@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.ServiceModel;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using Microsoft.AspNetCore.Mvc;
@@ -26,13 +28,21 @@ namespace RTTWebApp.Controllers
             return View();
         }
 
+        //Search
         public async Task<JsonResult> Search(UserSearchQuery model)
         {
             var result = new UserResults();
-            var response = await userService.GetAllAsync(model);
-
-            result.Users = response;
-            result.Total = response.Length;
+            try
+            {
+                var response = await userService.GetAllAsync(model);
+                result.Users = response.Users;
+                result.Total = response.Total;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
@@ -99,7 +109,7 @@ namespace RTTWebApp.Controllers
                     {
                         if (!string.IsNullOrWhiteSpace(error.Trim()))
                         {
-                            var key = error.Split(' ')[1];
+                            var key = error.Split(' ')[1].TrimEnd('.');
 
                             ModelState.AddModelError(key, error.TrimEnd());
                         }
@@ -136,113 +146,88 @@ namespace RTTWebApp.Controllers
         }
 
         //Delete: User
-        [HttpDelete]
+        [HttpPost]
         public async Task<JsonResult> Delete(string Id)
         {
-            var results = await userService.DeleteAsync(Id);
+            var results = new ServerResponse();
+            try
+            {
+                results = await userService.DeleteAsync(Id);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
             return Json(results);
         }
 
-        //[HttpPost("ExportUserEventsXLSX")]
-        //public async Task<IActionResult> ExportUserEventsXLSX(string requestUri, int offset = 0, int limit = 50000)
-        //{
-        //    requestUri = "?" + requestUri + "&limit=" + limit;
-        //    var result = await userService.GetAllExportDetailsAsync();
+        //ExportCSV
+        public async Task<JsonResult> ExportUsers()
+        {
+            var response = await userService.GetAllExportDetailsAsync();
 
-        //    if (!result.ExportTable.HasErrors)
-        //    {
-        //        using (var exl = new ExcelPackage())
-        //        {
-        //            var worksheet = exl.Workbook.Worksheets.Add("user events");
+            var dt = response.ExportTable;
 
-        //            // headers
-        //            worksheet.Cells[1, 1].Value = "Id";
-        //            worksheet.Cells[1, 2].Value = "UserId";
-        //            worksheet.Cells[1, 3].Value = "ActionedBy";
-        //            worksheet.Cells[1, 4].Value = "EventDate";
-        //            worksheet.Cells[1, 5].Value = "EventType";
-        //            worksheet.Cells[1, 6].Value = "State";
-        //            worksheet.Cells[1, 7].Value = "Package";
+            var sb = new StringBuilder();
 
-        //            // data
-        //            int row = 2;
-        //            int current = 0;
-        //            while (!result.ExportTable.HasErrors && result.ExportTable.Rows.Count > current)
-        //            {
-        //                foreach (var user in result.ExportTable.Rows)
-        //                {
-        //                    //worksheet.Cells[row, 1].Value = user.Id;
-        //                    //worksheet.Cells[row, 2].Value = user.UserId;
-        //                    //worksheet.Cells[row, 3].Value = user.ActionedBy;
-        //                    //worksheet.Cells[row, 4].Value = user.EventDate;
-        //                    //worksheet.Cells[row, 5].Value = user.EventType;
-        //                    //worksheet.Cells[row, 6].Value = user.State;
-        //                    //worksheet.Cells[row, 7].Value = user.Package;
+            foreach (DataColumn col in dt.Columns)
+            {
+                sb.Append(col.ColumnName + ',');
+            }
 
-        //                    using (var range = worksheet.Cells[row, 1, row, 7])
-        //                    {
-        //                        range.Style.Border.Top.Style = ExcelBorderStyle.Thin;
-        //                        range.Style.Border.Top.Color.SetColor(Color.FromArgb(141, 180, 226));
-        //                        range.Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
-        //                        range.Style.Border.Bottom.Color.SetColor(Color.FromArgb(141, 180, 226));
-        //                    }
+            sb.Remove(sb.Length - 1, 1);
+            sb.Append(Environment.NewLine);
 
-        //                    row++;
-        //                    current++;
-        //                }
+            foreach (DataRow row in dt.Rows)
+            {
+                for (int i = 0; i < dt.Columns.Count; i++)
+                {
+                    sb.Append(row[i].ToString().Replace(",", "") + ",");
+                }
 
-        //                // next
-        //                if (result.Content.Total > limit + offset)
-        //                {
-        //                    current = 0;
-        //                    offset += limit;
-        //                    requestUri = requestUri.TrimEnd('?');
-        //                }
-        //            }
+                sb.Append(Environment.NewLine);
+            }
 
-        //            using (var range = worksheet.Cells[1, 1, 1, 7])
-        //            {
-        //                range.Style.Font.Bold = true;
-        //                range.Style.Fill.PatternType = ExcelFillStyle.Solid;
-        //                range.Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.FromArgb(79, 129, 189));
-        //                range.Style.Font.Color.SetColor(Color.White);
-        //            }
+            string id = Guid.NewGuid().ToString();
+            string filename = $"users-address-export-{string.Format("{0:yyyy-MM-dd}", DateTime.Today)}.csv";
 
-        //            if (row > 1)
-        //            {
-        //                worksheet.Cells[1, 1, 1, 7].AutoFilter = true;
-        //                worksheet.Cells[2, 4, row, 4].Style.Numberformat.Format = "yyyy-MM-dd HH:mm";
+            var myString = sb.ToString();
+            var myByteArray = System.Text.Encoding.UTF8.GetBytes(myString);
+            var ms = new MemoryStream(myByteArray);
 
-        //                using (var range = worksheet.Cells[1, 1, row, 7])
-        //                {
-        //                    range.Style.Border.Left.Style = ExcelBorderStyle.Thin;
-        //                    range.Style.Border.Left.Color.SetColor(Color.FromArgb(141, 180, 226));
-        //                    range.Style.Border.Right.Style = ExcelBorderStyle.Thin;
-        //                    range.Style.Border.Right.Color.SetColor(Color.FromArgb(141, 180, 226));
-        //                }
-        //            }
+            ms.Position = 0;
+            TempData[id] = ms.ToArray();
 
-        //            worksheet.Cells.AutoFitColumns(0);
+            return Json(new
+            {
+                id,
+                filename
+            });
 
-        //            string id = Guid.NewGuid().ToString();
-        //            string filename = $"user-events-export-{string.Format("{0:yyyy-MM-dd}", DateTime.Today)}.xlsx";
+        }
 
-        //            using (MemoryStream memoryStream = new MemoryStream())
-        //            {
-        //                exl.SaveAs(memoryStream);
-        //                memoryStream.Position = 0;
-        //                TempData[id] = memoryStream.ToArray();
-        //            }
-
-        //            return Json(new
-        //            {
-        //                id,
-        //                filename
-        //            });
-        //        }
-        //    }
-
-        //    return Json(new { });
-        //}
+        public virtual ActionResult GetUserExport(string id, string filename)
+        {
+            if (TempData[id] != null)
+            {
+                byte[] data = TempData[id] as byte[];
+                try
+                {
+                    return File(data, "text/csv", filename);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    throw;
+                }
+            }
+            else
+            {
+                // if we are here, an an error has occurred
+                return new EmptyResult();
+            }
+        }
     }
 }

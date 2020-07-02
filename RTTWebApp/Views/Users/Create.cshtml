@@ -6,12 +6,12 @@
                 <p class="h3 modal-title">Create New User</p>
             </div>
             <div class="modal-body">
-                <form data-ajax="true" data-ajax-method="post" data-ajax-success="UserCreateResult" id="CreateUserForm" asp-controller="Users" asp-action="Create" asp-route-returnurl="@ViewBag.ReturnUrl">
+                <form id="CreateUserForm">
                     <div class="row">
                         <div class="col-md-6 form-group">
                             <label>First Name</label>
-                            <input name="Firstname" id="Firstname" class="form-control" />
-                            <span asp-validation-for="Firstname" class="text-danger"></span>
+                            <input name="FirstName" id="FirstName" class="form-control" />
+                            <span asp-validation-for="FirstName" class="text-danger"></span>
                         </div>
                         <div class="col-md-6 form-group">
                             <label>Surname</label>

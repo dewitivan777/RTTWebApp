@@ -35,7 +35,7 @@ namespace RTTWebApp.ServiceUser {
         private string EmailField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string FirstnameField;
+        private string FirstNameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string GenderField;
@@ -115,14 +115,14 @@ namespace RTTWebApp.ServiceUser {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Firstname {
+        public string FirstName {
             get {
-                return this.FirstnameField;
+                return this.FirstNameField;
             }
             set {
-                if ((object.ReferenceEquals(this.FirstnameField, value) != true)) {
-                    this.FirstnameField = value;
-                    this.RaisePropertyChanged("Firstname");
+                if ((object.ReferenceEquals(this.FirstNameField, value) != true)) {
+                    this.FirstNameField = value;
+                    this.RaisePropertyChanged("FirstName");
                 }
             }
         }
@@ -263,7 +263,7 @@ namespace RTTWebApp.ServiceUser {
         private int OffsetField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private RTTWebApp.ServiceUser.UserDetails UserQueryField;
+        private RTTWebApp.ServiceUser.UserSearchModel UserQueryField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -302,7 +302,7 @@ namespace RTTWebApp.ServiceUser {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public RTTWebApp.ServiceUser.UserDetails UserQuery {
+        public RTTWebApp.ServiceUser.UserSearchModel UserQuery {
             get {
                 return this.UserQueryField;
             }
@@ -310,6 +310,224 @@ namespace RTTWebApp.ServiceUser {
                 if ((object.ReferenceEquals(this.UserQueryField, value) != true)) {
                     this.UserQueryField = value;
                     this.RaisePropertyChanged("UserQuery");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="UserSearchModel", Namespace="http://schemas.datacontract.org/2004/07/WcfServiceApp.Models")]
+    [System.SerializableAttribute()]
+    public partial class UserSearchModel : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string EmailField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string FirstNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string GenderField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string MobileField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string SurnameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string UserIdField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Email {
+            get {
+                return this.EmailField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EmailField, value) != true)) {
+                    this.EmailField = value;
+                    this.RaisePropertyChanged("Email");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string FirstName {
+            get {
+                return this.FirstNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FirstNameField, value) != true)) {
+                    this.FirstNameField = value;
+                    this.RaisePropertyChanged("FirstName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Gender {
+            get {
+                return this.GenderField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.GenderField, value) != true)) {
+                    this.GenderField = value;
+                    this.RaisePropertyChanged("Gender");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Mobile {
+            get {
+                return this.MobileField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MobileField, value) != true)) {
+                    this.MobileField = value;
+                    this.RaisePropertyChanged("Mobile");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Surname {
+            get {
+                return this.SurnameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SurnameField, value) != true)) {
+                    this.SurnameField = value;
+                    this.RaisePropertyChanged("Surname");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string UserId {
+            get {
+                return this.UserIdField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.UserIdField, value) != true)) {
+                    this.UserIdField = value;
+                    this.RaisePropertyChanged("UserId");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ServerResponseUser", Namespace="http://schemas.datacontract.org/2004/07/WcfServiceApp")]
+    [System.SerializableAttribute()]
+    public partial class ServerResponseUser : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ErrorMessageField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool SuccessField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int TotalField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private RTTWebApp.ServiceUser.UserDetails[] UsersField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ErrorMessage {
+            get {
+                return this.ErrorMessageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ErrorMessageField, value) != true)) {
+                    this.ErrorMessageField = value;
+                    this.RaisePropertyChanged("ErrorMessage");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Success {
+            get {
+                return this.SuccessField;
+            }
+            set {
+                if ((this.SuccessField.Equals(value) != true)) {
+                    this.SuccessField = value;
+                    this.RaisePropertyChanged("Success");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Total {
+            get {
+                return this.TotalField;
+            }
+            set {
+                if ((this.TotalField.Equals(value) != true)) {
+                    this.TotalField = value;
+                    this.RaisePropertyChanged("Total");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public RTTWebApp.ServiceUser.UserDetails[] Users {
+            get {
+                return this.UsersField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.UsersField, value) != true)) {
+                    this.UsersField = value;
+                    this.RaisePropertyChanged("Users");
                 }
             }
         }
@@ -358,7 +576,7 @@ namespace RTTWebApp.ServiceUser {
         private string UserIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int Zipcode_PostalCodeField;
+        private int ZipCode_PostalCodeField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -475,14 +693,14 @@ namespace RTTWebApp.ServiceUser {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Zipcode_PostalCode {
+        public int ZipCode_PostalCode {
             get {
-                return this.Zipcode_PostalCodeField;
+                return this.ZipCode_PostalCodeField;
             }
             set {
-                if ((this.Zipcode_PostalCodeField.Equals(value) != true)) {
-                    this.Zipcode_PostalCodeField = value;
-                    this.RaisePropertyChanged("Zipcode_PostalCode");
+                if ((this.ZipCode_PostalCodeField.Equals(value) != true)) {
+                    this.ZipCode_PostalCodeField = value;
+                    this.RaisePropertyChanged("ZipCode_PostalCode");
                 }
             }
         }
@@ -528,6 +746,301 @@ namespace RTTWebApp.ServiceUser {
                 if ((object.ReferenceEquals(this.AddressTableField, value) != true)) {
                     this.AddressTableField = value;
                     this.RaisePropertyChanged("AddressTable");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="AddressSearchQuery", Namespace="http://schemas.datacontract.org/2004/07/WcfServiceApp")]
+    [System.SerializableAttribute()]
+    public partial class AddressSearchQuery : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private RTTWebApp.ServiceUser.AddressSearchModel AddressQueryField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int LimitField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int OffsetField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public RTTWebApp.ServiceUser.AddressSearchModel AddressQuery {
+            get {
+                return this.AddressQueryField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.AddressQueryField, value) != true)) {
+                    this.AddressQueryField = value;
+                    this.RaisePropertyChanged("AddressQuery");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Limit {
+            get {
+                return this.LimitField;
+            }
+            set {
+                if ((this.LimitField.Equals(value) != true)) {
+                    this.LimitField = value;
+                    this.RaisePropertyChanged("Limit");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Offset {
+            get {
+                return this.OffsetField;
+            }
+            set {
+                if ((this.OffsetField.Equals(value) != true)) {
+                    this.OffsetField = value;
+                    this.RaisePropertyChanged("Offset");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="AddressSearchModel", Namespace="http://schemas.datacontract.org/2004/07/WcfServiceApp.Models")]
+    [System.SerializableAttribute()]
+    public partial class AddressSearchModel : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string AddressField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string AddressTypeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CityField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ProvinceField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string UserIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int ZipCode_PostalCodeField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Address {
+            get {
+                return this.AddressField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.AddressField, value) != true)) {
+                    this.AddressField = value;
+                    this.RaisePropertyChanged("Address");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string AddressType {
+            get {
+                return this.AddressTypeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.AddressTypeField, value) != true)) {
+                    this.AddressTypeField = value;
+                    this.RaisePropertyChanged("AddressType");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string City {
+            get {
+                return this.CityField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CityField, value) != true)) {
+                    this.CityField = value;
+                    this.RaisePropertyChanged("City");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Province {
+            get {
+                return this.ProvinceField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ProvinceField, value) != true)) {
+                    this.ProvinceField = value;
+                    this.RaisePropertyChanged("Province");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string UserId {
+            get {
+                return this.UserIdField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.UserIdField, value) != true)) {
+                    this.UserIdField = value;
+                    this.RaisePropertyChanged("UserId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ZipCode_PostalCode {
+            get {
+                return this.ZipCode_PostalCodeField;
+            }
+            set {
+                if ((this.ZipCode_PostalCodeField.Equals(value) != true)) {
+                    this.ZipCode_PostalCodeField = value;
+                    this.RaisePropertyChanged("ZipCode_PostalCode");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ServerResponseAddress", Namespace="http://schemas.datacontract.org/2004/07/WcfServiceApp")]
+    [System.SerializableAttribute()]
+    public partial class ServerResponseAddress : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private RTTWebApp.ServiceUser.UserAddressDetails[] AddressesField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ErrorMessageField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool SuccessField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int TotalField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public RTTWebApp.ServiceUser.UserAddressDetails[] Addresses {
+            get {
+                return this.AddressesField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.AddressesField, value) != true)) {
+                    this.AddressesField = value;
+                    this.RaisePropertyChanged("Addresses");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ErrorMessage {
+            get {
+                return this.ErrorMessageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ErrorMessageField, value) != true)) {
+                    this.ErrorMessageField = value;
+                    this.RaisePropertyChanged("ErrorMessage");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Success {
+            get {
+                return this.SuccessField;
+            }
+            set {
+                if ((this.SuccessField.Equals(value) != true)) {
+                    this.SuccessField = value;
+                    this.RaisePropertyChanged("Success");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Total {
+            get {
+                return this.TotalField;
+            }
+            set {
+                if ((this.TotalField.Equals(value) != true)) {
+                    this.TotalField = value;
+                    this.RaisePropertyChanged("Total");
                 }
             }
         }
@@ -659,10 +1172,10 @@ namespace RTTWebApp.ServiceUser {
         System.Threading.Tasks.Task<RTTWebApp.ServiceUser.UserData> GetAsync(RTTWebApp.ServiceUser.UserDetails userInfo);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUser/GetAll", ReplyAction="http://tempuri.org/IServiceUser/GetAllResponse")]
-        RTTWebApp.ServiceUser.UserDetails[] GetAll(RTTWebApp.ServiceUser.UserSearchQuery query);
+        RTTWebApp.ServiceUser.ServerResponseUser GetAll(RTTWebApp.ServiceUser.UserSearchQuery query);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUser/GetAll", ReplyAction="http://tempuri.org/IServiceUser/GetAllResponse")]
-        System.Threading.Tasks.Task<RTTWebApp.ServiceUser.UserDetails[]> GetAllAsync(RTTWebApp.ServiceUser.UserSearchQuery query);
+        System.Threading.Tasks.Task<RTTWebApp.ServiceUser.ServerResponseUser> GetAllAsync(RTTWebApp.ServiceUser.UserSearchQuery query);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUser/GetAddress", ReplyAction="http://tempuri.org/IServiceUser/GetAddressResponse")]
         RTTWebApp.ServiceUser.UserAddress GetAddress(RTTWebApp.ServiceUser.UserAddressDetails addressInfo);
@@ -670,11 +1183,11 @@ namespace RTTWebApp.ServiceUser {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUser/GetAddress", ReplyAction="http://tempuri.org/IServiceUser/GetAddressResponse")]
         System.Threading.Tasks.Task<RTTWebApp.ServiceUser.UserAddress> GetAddressAsync(RTTWebApp.ServiceUser.UserAddressDetails addressInfo);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUser/GetUserAddress", ReplyAction="http://tempuri.org/IServiceUser/GetUserAddressResponse")]
-        RTTWebApp.ServiceUser.UserAddressDetails[] GetUserAddress(RTTWebApp.ServiceUser.UserAddressDetails addressInfo);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUser/GetAllAddress", ReplyAction="http://tempuri.org/IServiceUser/GetAllAddressResponse")]
+        RTTWebApp.ServiceUser.ServerResponseAddress GetAllAddress(RTTWebApp.ServiceUser.AddressSearchQuery addressInfo);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUser/GetUserAddress", ReplyAction="http://tempuri.org/IServiceUser/GetUserAddressResponse")]
-        System.Threading.Tasks.Task<RTTWebApp.ServiceUser.UserAddressDetails[]> GetUserAddressAsync(RTTWebApp.ServiceUser.UserAddressDetails addressInfo);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUser/GetAllAddress", ReplyAction="http://tempuri.org/IServiceUser/GetAllAddressResponse")]
+        System.Threading.Tasks.Task<RTTWebApp.ServiceUser.ServerResponseAddress> GetAllAddressAsync(RTTWebApp.ServiceUser.AddressSearchQuery addressInfo);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUser/GetAllExportDetails", ReplyAction="http://tempuri.org/IServiceUser/GetAllExportDetailsResponse")]
         RTTWebApp.ServiceUser.ExportData GetAllExportDetails();
@@ -700,11 +1213,23 @@ namespace RTTWebApp.ServiceUser {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUser/Update", ReplyAction="http://tempuri.org/IServiceUser/UpdateResponse")]
         System.Threading.Tasks.Task<RTTWebApp.ServiceUser.ServerResponse> UpdateAsync(RTTWebApp.ServiceUser.UserDetails userInfo);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUser/UpdateAddress", ReplyAction="http://tempuri.org/IServiceUser/UpdateAddressResponse")]
+        RTTWebApp.ServiceUser.ServerResponse UpdateAddress(RTTWebApp.ServiceUser.UserAddressDetails addressInfo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUser/UpdateAddress", ReplyAction="http://tempuri.org/IServiceUser/UpdateAddressResponse")]
+        System.Threading.Tasks.Task<RTTWebApp.ServiceUser.ServerResponse> UpdateAddressAsync(RTTWebApp.ServiceUser.UserAddressDetails addressInfo);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUser/Delete", ReplyAction="http://tempuri.org/IServiceUser/DeleteResponse")]
         RTTWebApp.ServiceUser.ServerResponse Delete(string Id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUser/Delete", ReplyAction="http://tempuri.org/IServiceUser/DeleteResponse")]
         System.Threading.Tasks.Task<RTTWebApp.ServiceUser.ServerResponse> DeleteAsync(string Id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUser/DeleteAddress", ReplyAction="http://tempuri.org/IServiceUser/DeleteAddressResponse")]
+        RTTWebApp.ServiceUser.ServerResponse DeleteAddress(string Id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUser/DeleteAddress", ReplyAction="http://tempuri.org/IServiceUser/DeleteAddressResponse")]
+        System.Threading.Tasks.Task<RTTWebApp.ServiceUser.ServerResponse> DeleteAddressAsync(string Id);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -742,11 +1267,11 @@ namespace RTTWebApp.ServiceUser {
             return base.Channel.GetAsync(userInfo);
         }
         
-        public RTTWebApp.ServiceUser.UserDetails[] GetAll(RTTWebApp.ServiceUser.UserSearchQuery query) {
+        public RTTWebApp.ServiceUser.ServerResponseUser GetAll(RTTWebApp.ServiceUser.UserSearchQuery query) {
             return base.Channel.GetAll(query);
         }
         
-        public System.Threading.Tasks.Task<RTTWebApp.ServiceUser.UserDetails[]> GetAllAsync(RTTWebApp.ServiceUser.UserSearchQuery query) {
+        public System.Threading.Tasks.Task<RTTWebApp.ServiceUser.ServerResponseUser> GetAllAsync(RTTWebApp.ServiceUser.UserSearchQuery query) {
             return base.Channel.GetAllAsync(query);
         }
         
@@ -758,12 +1283,12 @@ namespace RTTWebApp.ServiceUser {
             return base.Channel.GetAddressAsync(addressInfo);
         }
         
-        public RTTWebApp.ServiceUser.UserAddressDetails[] GetUserAddress(RTTWebApp.ServiceUser.UserAddressDetails addressInfo) {
-            return base.Channel.GetUserAddress(addressInfo);
+        public RTTWebApp.ServiceUser.ServerResponseAddress GetAllAddress(RTTWebApp.ServiceUser.AddressSearchQuery addressInfo) {
+            return base.Channel.GetAllAddress(addressInfo);
         }
         
-        public System.Threading.Tasks.Task<RTTWebApp.ServiceUser.UserAddressDetails[]> GetUserAddressAsync(RTTWebApp.ServiceUser.UserAddressDetails addressInfo) {
-            return base.Channel.GetUserAddressAsync(addressInfo);
+        public System.Threading.Tasks.Task<RTTWebApp.ServiceUser.ServerResponseAddress> GetAllAddressAsync(RTTWebApp.ServiceUser.AddressSearchQuery addressInfo) {
+            return base.Channel.GetAllAddressAsync(addressInfo);
         }
         
         public RTTWebApp.ServiceUser.ExportData GetAllExportDetails() {
@@ -798,12 +1323,28 @@ namespace RTTWebApp.ServiceUser {
             return base.Channel.UpdateAsync(userInfo);
         }
         
+        public RTTWebApp.ServiceUser.ServerResponse UpdateAddress(RTTWebApp.ServiceUser.UserAddressDetails addressInfo) {
+            return base.Channel.UpdateAddress(addressInfo);
+        }
+        
+        public System.Threading.Tasks.Task<RTTWebApp.ServiceUser.ServerResponse> UpdateAddressAsync(RTTWebApp.ServiceUser.UserAddressDetails addressInfo) {
+            return base.Channel.UpdateAddressAsync(addressInfo);
+        }
+        
         public RTTWebApp.ServiceUser.ServerResponse Delete(string Id) {
             return base.Channel.Delete(Id);
         }
         
         public System.Threading.Tasks.Task<RTTWebApp.ServiceUser.ServerResponse> DeleteAsync(string Id) {
             return base.Channel.DeleteAsync(Id);
+        }
+        
+        public RTTWebApp.ServiceUser.ServerResponse DeleteAddress(string Id) {
+            return base.Channel.DeleteAddress(Id);
+        }
+        
+        public System.Threading.Tasks.Task<RTTWebApp.ServiceUser.ServerResponse> DeleteAddressAsync(string Id) {
+            return base.Channel.DeleteAddressAsync(Id);
         }
     }
 }
