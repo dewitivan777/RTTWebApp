@@ -79,35 +79,35 @@
   <xs:element name="InsertUserDetailsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="InsertUserDetailsResult" type="xs:boolean" />
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/WcfServiceApp" minOccurs="0" name="InsertUserDetailsResult" nillable="true" type="q11:ServerResponse" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="InsertUserAddress">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/WcfServiceApp" minOccurs="0" name="addressInfo" nillable="true" type="q11:UserAddressDetails" />
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/WcfServiceApp" minOccurs="0" name="addressInfo" nillable="true" type="q12:UserAddressDetails" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="InsertUserAddressResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="InsertUserAddressResult" type="xs:boolean" />
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/WcfServiceApp" minOccurs="0" name="InsertUserAddressResult" nillable="true" type="q13:ServerResponse" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="Update">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/WcfServiceApp" minOccurs="0" name="userInfo" nillable="true" type="q12:UserDetails" />
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/WcfServiceApp" minOccurs="0" name="userInfo" nillable="true" type="q14:UserDetails" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="UpdateResult" type="xs:boolean" />
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/WcfServiceApp" minOccurs="0" name="UpdateResult" nillable="true" type="q15:ServerResponse" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -121,7 +121,7 @@
   <xs:element name="DeleteResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="DeleteResult" type="xs:boolean" />
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/WcfServiceApp" minOccurs="0" name="DeleteResult" nillable="true" type="q16:ServerResponse" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

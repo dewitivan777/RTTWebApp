@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.ServiceModel;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -34,10 +37,12 @@ namespace RTTWebApp.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
+        //Create: User
         [HttpPost]
-        public async Task<JsonResult> Create(UserDetails Model)
+        public async Task<ActionResult> Create(UserDetails Model)
         {
-           var results = false;
+            var results = new ServerResponse();
+
             try
             {
                 results = await userService.InsertUserDetailsAsync(Model);
@@ -45,18 +50,92 @@ namespace RTTWebApp.Controllers
             catch (FaultException ex)
             {
                 var arr = ex.Message.Split('\n').ToArray();
+
+                if (arr[0].Contains("validation errors"))
+                {
+                    arr = arr.Skip(2).ToArray();
+
+                    foreach (var error in arr)
+                    {
+                        if (!string.IsNullOrWhiteSpace(error.Trim()))
+                        {
+                            var key = error.Split(' ')[1];
+
+                            ModelState.AddModelError(key, error.TrimEnd());
+                        }
+                    }
+
+                    TempData["UserErrors"] = ModelState;
+                    return new HttpStatusCodeResult(422, "Validation Errors.");
+                }
+                else
+                {
+                    return Json(results, JsonRequestBehavior.AllowGet);
+                }
             }
 
-            return Json(results);
+            return Json(results, JsonRequestBehavior.AllowGet);
         }
 
-        [HttpPut]
-        public async Task<JsonResult> Edit(UserDetails Model)
+        //Edit: User
+        [HttpPost]
+        public async Task<ActionResult> Edit(UserDetails Model)
         {
-            var results = await userService.UpdateAsync(Model);
-            return Json(results);
+            var results = new ServerResponse();
+
+            try
+            {
+                results = await userService.UpdateAsync(Model);
+            }
+            catch (FaultException ex)
+            {
+                var arr = ex.Message.Split('\n').ToArray();
+
+                if (arr[0].Contains("validation errors"))
+                {
+                    arr = arr.Skip(2).ToArray();
+
+                    foreach (var error in arr)
+                    {
+                        if (!string.IsNullOrWhiteSpace(error.Trim()))
+                        {
+                            var key = error.Split(' ')[1];
+
+                            ModelState.AddModelError(key, error.TrimEnd());
+                        }
+                    }
+
+                    TempData["UserErrors"] = ModelState;
+                    return new HttpStatusCodeResult(422, "Validation Errors.");
+                }
+                else
+                {
+                    return Json(results, JsonRequestBehavior.AllowGet);
+                }
+            }
+
+            return Json(results, JsonRequestBehavior.AllowGet);
         }
 
+        //Fetch form validation errors
+        public async Task<ActionResult> FetchErrors()
+        {
+            var errorStateDictionary = TempData["UserErrors"] as ModelStateDictionary;
+            var model = new Dictionary<string, string>();
+
+            foreach (var key in errorStateDictionary.Keys)
+            {
+                if (errorStateDictionary[key].Errors.Any())
+                {
+                    //Only display first error for element
+                    model.Add(key, errorStateDictionary[key].Errors[0].ErrorMessage);
+                }
+            }
+
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
+        //Delete: User
         [HttpDelete]
         public async Task<JsonResult> Delete(string Id)
         {

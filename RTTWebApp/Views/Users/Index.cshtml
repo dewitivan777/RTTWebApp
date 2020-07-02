@@ -1,4 +1,5 @@
-﻿@{
+﻿
+@{
     ViewBag.Title = "Users";
 }
 <div class="card">
@@ -55,117 +56,118 @@
     </div>
 </div>
 
-<div class="card">
-    <h4 class="card-header" style="line-height: 33px;">
-        <span data-bind="HeaderText">Users</span>
-        <a data-toggle="modal" data-target="#CreateUser" class="btn btn-primary pull-right"><i class="fa fa-share-square-o"></i>Add User</a>
-    </h4>
-    <table class="table table-sm table-responsive table-bordered mb-0">
-        <thead>
-            <tr>
-                <th>
-                    UserID
-                </th>
-                <th>
-                    FirstName
-                </th>
-                <th>
-                    Surname
-                </th>
-                <th>
-                    Gender
-                </th>
-                <th>
-                    DOB
-                </th>
-                <th>
-                    Email
-                </th>
-                <th>
-                    Mobile
-                </th>
-                <th>
-                    WorkMobile
-                </th>
-                <th>
-                    DateCreated
-                </th>
-                <th>
-                    DateUpdated
-                </th>
-                <th>&nbsp;</th>
-            </tr>
-        </thead>
-        <tbody data-bind="foreach: Users">
-            <tr>
-                <td>
-                    <div data-bind="text: Userid"></div>
-                </td>
-                <td>
-                    <div data-bind="text: Firstname"></div>
-                </td>
-                <td>
-                    <div data-bind="text: Surname"></div>
-                </td>
-                <td>
-                    <div data-bind="text: Gender"></div>
-                </td>
-                <td>
-                    <div data-bind="text: DOB"></div>
-                </td>
-                <td>
-                    <div data-bind="text: Email"></div>
-                </td>
-                <td>
-                    <div data-bind="text: Mobile"></div>
-                </td>
-                <td>
-                    <div data-bind="text: WorkMobile"></div>
-                </td>
-                <td>
-                    <div data-bind="text: DateCreated"></div>
-                </td>
-                <td>
-                    <div data-bind="text: DateUpdated"></div>
-                </td>
-                <td>
-                    <a data-toggle="modal" data-target="#AddAddress" asp-route-id="userId">Add Address</a> |
-                    <a data-toggle="modal" data-target="#ShowAddress" asp-route-id="userId">Show User Addresses</a> |
-                    <a data-toggle="modal" data-target="#UserEdit" asp-route-id="userId">Edit</a> |
-                    <a data-toggle="modal" data-target="#UserDelete" asp-route-id="userId">Delete</a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+<div >
+    <div class="card">
+        <h4 class="card-header" style="line-height: 33px;">
+            <span data-bind="HeaderText">Users</span>
+            <a data-toggle="modal" data-target="#CreateUser" class="btn btn-primary pull-right"><i class="fa fa-share-square-o"></i>Add User</a>
+        </h4>
+        <table class="table table-sm table-responsive table-bordered mb-0">
+            <thead>
+                <tr>
+                    <th>
+                        UserID
+                    </th>
+                    <th>
+                        FirstName
+                    </th>
+                    <th>
+                        Surname
+                    </th>
+                    <th>
+                        Gender
+                    </th>
+                    <th>
+                        DOB
+                    </th>
+                    <th>
+                        Email
+                    </th>
+                    <th>
+                        Mobile
+                    </th>
+                    <th>
+                        WorkMobile
+                    </th>
+                    <th>
+                        DateCreated
+                    </th>
+                    <th>
+                        DateUpdated
+                    </th>
+                    <th>&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach: Users">
+                <tr>
+                    <td>
+                        <div data-bind="text: UserId"></div>
+                    </td>
+                    <td>
+                        <div data-bind="text: Firstname"></div>
+                    </td>
+                    <td>
+                        <div data-bind="text: Surname"></div>
+                    </td>
+                    <td>
+                        <div data-bind="text: Gender"></div>
+                    </td>
+                    <td>
+                        <div data-bind="text: $parent.convertToJsDate(DOB)"></div>
+                    </td>
+                    <td>
+                        <div data-bind="text: Email"></div>
+                    </td>
+                    <td>
+                        <div data-bind="text: Mobile"></div>
+                    </td>
+                    <td>
+                        <div data-bind="text: WorkMobile"></div>
+                    </td>
+                    <td>
+                        <div data-bind="text: $parent.convertToJsDate(DateCreated)"></div>
+                    </td>
+                    <td>
+                        <div data-bind="text: $parent.convertToJsDate(DateUpdated)"></div>
+                    </td>
+                    <td>
+                        <a href="#" data-toggle="modal" data-target="#AddAddress" asp-route-id="userId">Add Address</a> |
+                        <a href="#" data-toggle="modal" data-target="#ShowAddress" asp-route-id="userId">Show User Addresses</a> |
+                        <a href="#" data-bind="click: $parent.showEditDialog.bind($data, UserId,Firstname,Surname,Gender,$parent.convertToJsDate(DOB),Email,Mobile,WorkMobile)" data-toggle="modal" data-target="#EditUser">Edit</a> |
+                        <a href="#" data-bind="click: $parent.showDeleteDialog.bind($data, UserId, Firstname, Surname)" data-toggle="modal" data-target="#UserDelete" asp-route-id="userId">Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <nav aria-label="page navigation here" data-bind="visible: ShowPagingControl">
+        <ul class="pagination justify-content-center">
+            <li class="page-item" data-bind="visible: !FirstPageActive()">
+                <a href="javascript:;" class="page-link" aria-label="Previous" data-bind="click: GoToFirstPage">
+                    <span aria-hidden="true">&laquo;</span><span class="sr-only">Previous</span>
+                </a>
+            </li>
+            <li class="page-item" data-bind="visible: HasPrevious">
+                <a title="Prev" href="javascript:;" class="page-link" aria-label="Previous" data-bind="click: GoToPreviousPage">
+                    <span aria-hidden="true">&lsaquo;</span><span class="sr-only">Previous</span>
+                </a>
+            </li>
+
+            <!-- ko foreach: Pages -->
+            <li class="page-item" data-bind="css: { active: $parent.CurrentPage() === $data }">
+                <a href="javascript:;" class="page-link" data-bind="click: $parent.GoToPage, text: $data"></a>
+            </li>
+            <!-- /ko -->
+
+            <li class="page-item" data-bind="visible: HasNext">
+                <a href="#" class="page-link" aria-label="Next" data-bind="click: GoToNextPage">
+                    <span aria-hidden="true">&rsaquo;</span><span class="sr-only">Next</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
 </div>
-
-<nav aria-label="page navigation here" data-bind="visible: ShowPagingControl">
-    <ul class="pagination justify-content-center">
-        <li class="page-item" data-bind="visible: !FirstPageActive()">
-            <a href="javascript:;" class="page-link" aria-label="Previous" data-bind="click: GoToFirstPage">
-                <span aria-hidden="true">&laquo;</span><span class="sr-only">Previous</span>
-            </a>
-        </li>
-        <li class="page-item" data-bind="visible: HasPrevious">
-            <a title="Prev" href="javascript:;" class="page-link" aria-label="Previous" data-bind="click: GoToPreviousPage">
-                <span aria-hidden="true">&lsaquo;</span><span class="sr-only">Previous</span>
-            </a>
-        </li>
-
-        <!-- ko foreach: Pages -->
-        <li class="page-item" data-bind="css: { active: $parent.CurrentPage() === $data }">
-            <a href="javascript:;" class="page-link" data-bind="click: $parent.GoToPage, text: $data"></a>
-        </li>
-        <!-- /ko -->
-
-        <li class="page-item" data-bind="visible: HasNext">
-            <a href="#" class="page-link" aria-label="Next" data-bind="click: GoToNextPage">
-                <span aria-hidden="true">&rsaquo;</span><span class="sr-only">Next</span>
-            </a>
-        </li>
-    </ul>
-</nav>
-
 @{
     Html.RenderPartial("Create");
     Html.RenderPartial("Edit");
@@ -208,7 +210,6 @@
             }
         }
     </script>
-
 
     <script src="~/Scripts/lib/knockout/knockout-latest.min.js"></script>
     <script src="~/Scripts/ViewModels/UserViewModel.js"></script>

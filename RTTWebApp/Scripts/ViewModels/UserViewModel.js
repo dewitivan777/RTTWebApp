@@ -7,12 +7,16 @@ function userViewModel() {
 
     self['userId'] = ko.observable("");
     self['firstName'] = ko.observable("");
-    self['surName'] = ko.observable("");
+    self['surname'] = ko.observable("");
     self['dOB'] = ko.observable("");
     self['gender'] = ko.observable("");
     self['mobile'] = ko.observable("");
     self['workMobile'] = ko.observable("");
     self['email'] = ko.observable("");
+    self['datecreated'] = ko.observable("");
+    self['dateupdated'] = ko.observable("");
+
+    self['errorList'] = ko.observableArray([]);
 
     self.FirstPage = 1;
     self['Total'] = ko.observable(20);
@@ -24,7 +28,7 @@ function userViewModel() {
 
     self.SearchBaseUri = '/users/search';
 
-    self['Search'] = function() {
+    self['Search'] = function () {
         var sb = [];
         $('input,select').each(function (i, e) {
             var value = $(e).val().trim();
@@ -35,7 +39,7 @@ function userViewModel() {
 
                 if (name == 'Mobile') {
                     sb.push('mobile=' + value + '&workMobile=' + value);
-                } 
+                }
                 else {
                     sb.push(camelize($(e).attr('name')) + '=' + value);
                 }
@@ -62,10 +66,11 @@ function userViewModel() {
     self.CreateUser = function (page) {
         var data = new FormData();
 
-        $('#CreateUserForm input,select').each(function(i, e) {
+        $('#CreateUserForm input,select').each(function (i, e) {
             var value = $(e).val().trim();
-
-            data.append($(e).attr('name'), value);
+            if (value.length) {
+                data.append($(e).attr('name'), value);
+            }
         });
 
         $.ajax({
@@ -78,7 +83,7 @@ function userViewModel() {
                 $('#ajax-loader').css("visibility", "visible");
             },
             'success': function (result) {
-                if (result) {
+                if (result.Success == true) {
                     popup.showNotification("Notice", "User successfully created.", "top", "left", 3000, "true");
                 } else {
                     popup.showNotification("Notice", "User creation failed.", "top", "left", 3000, "true");
@@ -87,13 +92,115 @@ function userViewModel() {
                 $("#CreateUser").modal('toggle');
             },
             'error': function (result) {
+                if (result.status == 422) {
+                    $.get('/Users/FetchErrors', function (data) {
+                        data.forEach(function (item, index) {
 
+                        });
+                    });
+                } else {
+                    popup.showNotification("Notice", "User creation failed.", "top", "left", 3000, "true");
+                }
             },
             'complete': function () {
                 $('#ajax-loader').css("visibility", "hidden");
             }
         });
     };
+
+    self.EditUser = function (page) {
+        var data = new FormData();
+
+        $('#EditUserForm input,select').each(function (i, e) {
+            var value = $(e).val().trim();
+            if (value.length) {
+                data.append($(e).attr('name'), value);
+            }
+        });
+
+        //Add UserId to form data
+        data.append("UserId", self['userId']());
+
+        $.ajax({
+            'url': '/Users/Edit',
+            'data': data,
+            'processData': false,
+            'contentType': false,
+            'type': "POST",
+            'beforeSend': function () {
+                $('#ajax-loader').css("visibility", "visible");
+            },
+            'success': function (result) {
+                if (result.Success == true) {
+                    popup.showNotification("Notice", "User successfully Edited.", "top", "left", 3000, "true");
+                } else {
+                    popup.showNotification("Notice", "User edit failed.", "top", "left", 3000, "true");
+                }
+
+                $("#EditUser").modal('toggle');
+            },
+            'error': function (result) {
+                if (result.status == 422) {
+                    $.get('/Users/FetchErrors', function (data) {
+                        data.forEach(function (item, index) {
+
+                        });
+                    });
+                } else {
+                    popup.showNotification("Notice", "User edit failed.", "top", "left", 3000, "true");
+                }
+            },
+            'complete': function () {
+                $('#ajax-loader').css("visibility", "hidden");
+            }
+        });
+    };
+
+    self['showEditDialog'] = function (
+        userid,
+        firstname,
+        surname,
+        gender,
+        dob,
+        email,
+        mobile,
+        workmobile,
+        datecreated,
+        dateupdated) {
+
+        self['userId'](userid);
+        self['firstName'](firstname);
+        self['surname'](surname);
+        self['gender'](gender);
+        self['dOB'](dob);
+        self['mobile'](mobile);
+        self['workMobile'](workmobile);
+        self['email'](email);
+        self['datecreated'](datecreated);
+        self['dateupdated'](dateupdated);
+    };
+
+    self['showDeleteDialog'] = function(
+        userid,
+        firstname,
+        surname) {
+        self['userId'](userid);
+        self['firstName'](firstname);
+        self['surname'](surname);
+    };
+
+    self['convertToJsDate'] = function (date) {
+        if (date !== null) {
+            if (date.length > 0) {
+                var newDate = new Date(parseInt(date.substr(6)));
+                var month = newDate.getMonth() + 1;
+                var day = newDate.getDate();
+                var year = newDate.getFullYear();
+                return day + "/" + month + "/" + year;
+            }
+        }
+        return date;
+    }
 
     self.NumberOfPages = ko.pureComputed(function () {
         return Math.ceil(self['Total']() / self['Limit']());

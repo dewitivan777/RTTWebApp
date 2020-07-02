@@ -10,7 +10,7 @@
       <xs:element minOccurs="0" name="Gender" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Mobile" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Surname" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Userid" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UserId" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="WorkMobile" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
@@ -103,4 +103,11 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ExportData" nillable="true" type="tns:ExportData" />
+  <xs:complexType name="ServerResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ErrorMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Success" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ServerResponse" nillable="true" type="tns:ServerResponse" />
 </xs:schema>

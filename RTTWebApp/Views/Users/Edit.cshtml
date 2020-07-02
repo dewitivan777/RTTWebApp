@@ -3,13 +3,58 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <p class="h3 modal-title">Please login to continue</p>
+                <p class="h3 modal-title">Edit User</p>
             </div>
             <div class="modal-body">
-                <form  asp-controller="User" asp-action="Edit" asp-route-returnurl="@ViewBag.ReturnUrl">
-
-                    <div class="form-group text-right">
-                        <a data-dismiss="modal" data-toggle="modal" data-target="#RegisterUser">Don't have an account? Register now!</a>
+                <form data-ajax="true" data-ajax-method="post" data-ajax-success="EditCreateResult" id="EditUserForm" asp-controller="Users" asp-action="Create" asp-route-returnurl="@ViewBag.ReturnUrl">
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            <label>First Name</label>
+                            <input name="Firstname" id="Firstname" data-bind="value: firstName" class="form-control" />
+                            <span asp-validation-for="Firstname" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>Surname</label>
+                            <input name="Surname" id="Surname" data-bind="value: surname" class="form-control" />
+                            <span asp-validation-for="Surname" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            <label>Date of Birth</label>
+                            <input type="date" name="DOB" id="DOB" data-bind="value: convertToJsDate(dOB)" class="form-control" />
+                            <span asp-validation-for="DOB" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>Gender</label>
+                            <select name="Gender" id="Gender" data-bind="value: gender" class="form-control">
+                                <option></option>
+                                <option>Male</option>
+                                <option>Female</option>
+                                <option>Other</option>
+                            </select>
+                            <span asp-validation-for="Gender" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 form-group">
+                            <label>Email</label>
+                            <input name="Email" id="Email" data-bind="value: email" class="form-control" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>Mobile</label>
+                            <input name="Mobile" id="Mobile" data-bind="value: mobile" class="form-control" />
+                            <span asp-validation-for="Mobile" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>Work Mobile</label>
+                            <input name="WorkMobile" id="WorkMobile" data-bind="value: workMobile" class="form-control" />
+                            <span asp-validation-for="WorkMobile" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <a data-bind="click: EditUser" class="btn btn-primary">Submit</a>
                     </div>
                 </form>
             </div>

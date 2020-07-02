@@ -5,6 +5,10 @@
     {
       "library": "knockout@3.5.1",
       "destination": "Scripts/lib/knockout/"
+    },
+    {
+      "library": "moment.js@2.27.0",
+      "destination": "Scripts/lib/moment/"
     }
   ]
 }

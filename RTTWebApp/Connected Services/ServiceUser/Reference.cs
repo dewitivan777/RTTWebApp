@@ -47,7 +47,7 @@ namespace RTTWebApp.ServiceUser {
         private string SurnameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string UseridField;
+        private string UserIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string WorkMobileField;
@@ -167,14 +167,14 @@ namespace RTTWebApp.ServiceUser {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Userid {
+        public string UserId {
             get {
-                return this.UseridField;
+                return this.UserIdField;
             }
             set {
-                if ((object.ReferenceEquals(this.UseridField, value) != true)) {
-                    this.UseridField = value;
-                    this.RaisePropertyChanged("Userid");
+                if ((object.ReferenceEquals(this.UserIdField, value) != true)) {
+                    this.UserIdField = value;
+                    this.RaisePropertyChanged("UserId");
                 }
             }
         }
@@ -587,6 +587,67 @@ namespace RTTWebApp.ServiceUser {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ServerResponse", Namespace="http://schemas.datacontract.org/2004/07/WcfServiceApp")]
+    [System.SerializableAttribute()]
+    public partial class ServerResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ErrorMessageField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool SuccessField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ErrorMessage {
+            get {
+                return this.ErrorMessageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ErrorMessageField, value) != true)) {
+                    this.ErrorMessageField = value;
+                    this.RaisePropertyChanged("ErrorMessage");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Success {
+            get {
+                return this.SuccessField;
+            }
+            set {
+                if ((this.SuccessField.Equals(value) != true)) {
+                    this.SuccessField = value;
+                    this.RaisePropertyChanged("Success");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceUser.IServiceUser")]
     public interface IServiceUser {
@@ -622,28 +683,28 @@ namespace RTTWebApp.ServiceUser {
         System.Threading.Tasks.Task<RTTWebApp.ServiceUser.ExportData> GetAllExportDetailsAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUser/InsertUserDetails", ReplyAction="http://tempuri.org/IServiceUser/InsertUserDetailsResponse")]
-        bool InsertUserDetails(RTTWebApp.ServiceUser.UserDetails userInfo);
+        RTTWebApp.ServiceUser.ServerResponse InsertUserDetails(RTTWebApp.ServiceUser.UserDetails userInfo);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUser/InsertUserDetails", ReplyAction="http://tempuri.org/IServiceUser/InsertUserDetailsResponse")]
-        System.Threading.Tasks.Task<bool> InsertUserDetailsAsync(RTTWebApp.ServiceUser.UserDetails userInfo);
+        System.Threading.Tasks.Task<RTTWebApp.ServiceUser.ServerResponse> InsertUserDetailsAsync(RTTWebApp.ServiceUser.UserDetails userInfo);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUser/InsertUserAddress", ReplyAction="http://tempuri.org/IServiceUser/InsertUserAddressResponse")]
-        bool InsertUserAddress(RTTWebApp.ServiceUser.UserAddressDetails addressInfo);
+        RTTWebApp.ServiceUser.ServerResponse InsertUserAddress(RTTWebApp.ServiceUser.UserAddressDetails addressInfo);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUser/InsertUserAddress", ReplyAction="http://tempuri.org/IServiceUser/InsertUserAddressResponse")]
-        System.Threading.Tasks.Task<bool> InsertUserAddressAsync(RTTWebApp.ServiceUser.UserAddressDetails addressInfo);
+        System.Threading.Tasks.Task<RTTWebApp.ServiceUser.ServerResponse> InsertUserAddressAsync(RTTWebApp.ServiceUser.UserAddressDetails addressInfo);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUser/Update", ReplyAction="http://tempuri.org/IServiceUser/UpdateResponse")]
-        bool Update(RTTWebApp.ServiceUser.UserDetails userInfo);
+        RTTWebApp.ServiceUser.ServerResponse Update(RTTWebApp.ServiceUser.UserDetails userInfo);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUser/Update", ReplyAction="http://tempuri.org/IServiceUser/UpdateResponse")]
-        System.Threading.Tasks.Task<bool> UpdateAsync(RTTWebApp.ServiceUser.UserDetails userInfo);
+        System.Threading.Tasks.Task<RTTWebApp.ServiceUser.ServerResponse> UpdateAsync(RTTWebApp.ServiceUser.UserDetails userInfo);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUser/Delete", ReplyAction="http://tempuri.org/IServiceUser/DeleteResponse")]
-        bool Delete(string Id);
+        RTTWebApp.ServiceUser.ServerResponse Delete(string Id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUser/Delete", ReplyAction="http://tempuri.org/IServiceUser/DeleteResponse")]
-        System.Threading.Tasks.Task<bool> DeleteAsync(string Id);
+        System.Threading.Tasks.Task<RTTWebApp.ServiceUser.ServerResponse> DeleteAsync(string Id);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -713,35 +774,35 @@ namespace RTTWebApp.ServiceUser {
             return base.Channel.GetAllExportDetailsAsync();
         }
         
-        public bool InsertUserDetails(RTTWebApp.ServiceUser.UserDetails userInfo) {
+        public RTTWebApp.ServiceUser.ServerResponse InsertUserDetails(RTTWebApp.ServiceUser.UserDetails userInfo) {
             return base.Channel.InsertUserDetails(userInfo);
         }
         
-        public System.Threading.Tasks.Task<bool> InsertUserDetailsAsync(RTTWebApp.ServiceUser.UserDetails userInfo) {
+        public System.Threading.Tasks.Task<RTTWebApp.ServiceUser.ServerResponse> InsertUserDetailsAsync(RTTWebApp.ServiceUser.UserDetails userInfo) {
             return base.Channel.InsertUserDetailsAsync(userInfo);
         }
         
-        public bool InsertUserAddress(RTTWebApp.ServiceUser.UserAddressDetails addressInfo) {
+        public RTTWebApp.ServiceUser.ServerResponse InsertUserAddress(RTTWebApp.ServiceUser.UserAddressDetails addressInfo) {
             return base.Channel.InsertUserAddress(addressInfo);
         }
         
-        public System.Threading.Tasks.Task<bool> InsertUserAddressAsync(RTTWebApp.ServiceUser.UserAddressDetails addressInfo) {
+        public System.Threading.Tasks.Task<RTTWebApp.ServiceUser.ServerResponse> InsertUserAddressAsync(RTTWebApp.ServiceUser.UserAddressDetails addressInfo) {
             return base.Channel.InsertUserAddressAsync(addressInfo);
         }
         
-        public bool Update(RTTWebApp.ServiceUser.UserDetails userInfo) {
+        public RTTWebApp.ServiceUser.ServerResponse Update(RTTWebApp.ServiceUser.UserDetails userInfo) {
             return base.Channel.Update(userInfo);
         }
         
-        public System.Threading.Tasks.Task<bool> UpdateAsync(RTTWebApp.ServiceUser.UserDetails userInfo) {
+        public System.Threading.Tasks.Task<RTTWebApp.ServiceUser.ServerResponse> UpdateAsync(RTTWebApp.ServiceUser.UserDetails userInfo) {
             return base.Channel.UpdateAsync(userInfo);
         }
         
-        public bool Delete(string Id) {
+        public RTTWebApp.ServiceUser.ServerResponse Delete(string Id) {
             return base.Channel.Delete(Id);
         }
         
-        public System.Threading.Tasks.Task<bool> DeleteAsync(string Id) {
+        public System.Threading.Tasks.Task<RTTWebApp.ServiceUser.ServerResponse> DeleteAsync(string Id) {
             return base.Channel.DeleteAsync(Id);
         }
     }
