@@ -89,7 +89,7 @@ function userViewModel() {
             'contentType': false,
             'type': "POST",
             'beforeSend': function () {
-                $('#ajax-loader').css("visibility", "visible");
+                $('.loading').show();
             },
             'success': function (result) {
                 if (result.Success == true) {
@@ -118,7 +118,7 @@ function userViewModel() {
                 }
             },
             'complete': function () {
-                $('#ajax-loader').css("visibility", "hidden");
+                $('.loading').hide();
             }
         });
     };
@@ -148,7 +148,7 @@ function userViewModel() {
             'contentType': false,
             'type': "POST",
             'beforeSend': function () {
-                $('#ajax-loader').css("visibility", "visible");
+                $('.loading').show();
             },
             'success': function (result) {
                 if (result.Success == true) {
@@ -178,7 +178,7 @@ function userViewModel() {
                 }
             },
             'complete': function () {
-                $('#ajax-loader').css("visibility", "hidden");
+                $('.loading').hide();
             }
         });
     };
@@ -204,7 +204,7 @@ function userViewModel() {
             'contentType': false,
             'type': "POST",
             'beforeSend': function () {
-                $('#ajax-loader').css("visibility", "visible");
+                $('.loading').show();
             },
             'success': function (result) {
                 if (result.Success == true) {
@@ -234,7 +234,7 @@ function userViewModel() {
                 }
             },
             'complete': function () {
-                $('#ajax-loader').css("visibility", "hidden");
+                $('.loading').hide();
             }
         });
     };

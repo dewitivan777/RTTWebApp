@@ -90,7 +90,7 @@
             'contentType': false,
             'type': "POST",
             'beforeSend': function () {
-                $('#ajax-loader').css("visibility", "visible");
+                $('.loading').show();
             },
             'success': function (result) {
                 if (result.Success == true) {
@@ -120,7 +120,7 @@
                 }
             },
             'complete': function () {
-                $('#ajax-loader').css("visibility", "hidden");
+                $('.loading').hide();
             }
         });
     };

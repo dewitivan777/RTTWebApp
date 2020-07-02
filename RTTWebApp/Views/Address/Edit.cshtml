@@ -10,12 +10,12 @@
                     <div class="row">
                         <div class="col-md-6 form-group">
                             <label>Address</label>
-                            <textarea  data-bind="value: address" name="Address" id="Address" rows="1" maxlength="2000" class="form-control" placeholder="Type Address here..."></textarea>
+                            <textarea data-bind="value: address" name="Address" id="Address" rows="1" maxlength="2000" class="form-control" placeholder="Type Address here..."></textarea>
                             <span asp-validation-for="Address" class="text-danger"></span>
                         </div>
                         <div class="col-md-6 form-group">
                             <label>AddressType</label>
-                            <select  data-bind="value: addressType" name="AddressType" id="AddressType" class="form-control">
+                            <select data-bind="value: addressType" name="AddressType" id="AddressType" class="form-control">
                                 <option></option>
                                 <option>Residential</option>
                                 <option>Business</option>
@@ -27,12 +27,12 @@
                     <div class="row">
                         <div class="col-md-6 form-group">
                             <label>City</label>
-                            <input  data-bind="value: city" name="City" id="City" class="form-control" />
+                            <input data-bind="value: city" name="City" id="City" class="form-control" />
                             <span asp-validation-for="City" class="text-danger"></span>
                         </div>
                         <div class="col-md-6 form-group">
                             <label>Province</label>
-                            <select  data-bind="value: province" name="Province" id="Province" class="form-control">
+                            <select data-bind="value: province" name="Province" id="Province" class="form-control">
                                 <option></option>
                                 <option>Eastern Cape</option>
                                 <option>Free State</option>
@@ -49,12 +49,15 @@
                     <div class="row">
                         <div class="col-md-12 form-group">
                             <label>Zipcode_PostalCode</label>
-                            <input  data-bind="value: zipcode_PostalCode" name="Zipcode_PostalCode" id="Zipcode_PostalCode" class="form-control" />
+                            <input data-bind="value: zipcode_PostalCode" name="Zipcode_PostalCode" id="Zipcode_PostalCode" class="form-control" />
                             <span asp-validation-for="Zipcode_PostalCode" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="form-group">
                         <a data-bind="click: EditAddress" class="btn btn-primary">Create</a>
+                    </div>
+                    <div class="loading text-center" hidden>
+                        <i class="fa fa-spinner text-primary fa-2x fa-pulse"></i>
                     </div>
                 </form>
             </div>
